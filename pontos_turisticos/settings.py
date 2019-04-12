@@ -83,7 +83,19 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-    }
+    },
+    'banco2': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'db2.sqlite3')
+    },
+    # 'bancoHapvida': {
+    #     'ENGINE': 'django.db.backends.postgresql',
+    #     'NAME': 'HOSPDESE',                      
+    #     'USER': 'HUMASTER',
+    #     'PASSWORD': 'huhospdes',
+    #     'HOST': '10.1.22.131',
+    #     'PORT': '1521',
+    # }
 }
 
 
