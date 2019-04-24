@@ -37,12 +37,15 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django_filters',
     'rest_framework',
+    'django.contrib.sites',
     'core',
     'atracoes',
     'comentarios',
     'avaliacoes',
-    'enderecos'
+    'enderecos',
+    'hapvida'
 ]
 
 MIDDLEWARE = [
@@ -80,17 +83,37 @@ WSGI_APPLICATION = 'pontos_turisticos.wsgi.application'
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
 
 DATABASES = {
+    # 'default': {
+    #     'ENGINE': 'django.db.backends.sqlite3',
+    #     'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+    # },
+    # 'default': {
+    #     'ENGINE': 'django.db.backends.oracle',
+    #     'NAME': '(DESCRIPTION =(ADDRESS_LIST =(ADDRESS = (PROTOCOL = TCP)(HOST = 10.1.22.131)(PORT = 1521)))(CONNECT_DATA =(SID = hospital)))',
+    #     'USER': 'HUMASTER',
+    #     'PASSWORD': 'huhospdes'
+    # }
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-    },
-    'banco2': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db2.sqlite3')
-    },
+        'ENGINE': 'django.db.backends.oracle',
+        'NAME': 'hospital',
+        'USER': 'HUMASTER',
+        'PASSWORD': 'huhospdes',
+        # 'NAME': 'hospital ',
+        'OPTIONS': {
+            'threaded': True,
+            'use_returning_into': False
+        },  
+        'HOST': '10.1.22.131',
+        'PORT': '1521'
+    }   
+    # 'banco2': {
+    #     'ENGINE': 'django.db.backends.sqlite3',
+    #     'NAME': os.path.join(BASE_DIR, 'db2.sqlite3')
+    # },
+    #
     # 'bancoHapvida': {
-    #     'ENGINE': 'django.db.backends.postgresql',
-    #     'NAME': 'HOSPDESE',                      
+    #     'ENGINE': 'django.db.backends.oracle',
+    #     'NAME': os.path.join(BASE_DIR, 'HOSPDESE'),
     #     'USER': 'HUMASTER',
     #     'PASSWORD': 'huhospdes',
     #     'HOST': '10.1.22.131',
@@ -140,3 +163,7 @@ STATIC_URL = '/static/'
 MEDIA_ROOT = 'imagens'
 
 MEDIA_URL = '/media/'
+
+REST_FRAMEWORK = {
+    'DEFAULT_FILTER_BACKENDS': ('django_filters.rest_framework.DjangoFilterBackend',)
+}

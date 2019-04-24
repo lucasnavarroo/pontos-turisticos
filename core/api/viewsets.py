@@ -5,10 +5,13 @@ from django.utils.decorators import method_decorator
 from django.views.decorators.cache import cache_page
 from rest_framework.response import Response
 from rest_framework.decorators import action
+from rest_framework.filters import SearchFilter
 
 @method_decorator(cache_page(60), name='dispatch')
 class PontoTuristicoViewSet(ModelViewSet):
     serializer_class = PontoTuristicoSerializer
+    filter_backends = (SearchFilter)
+    search_fields = ('nome', 'descricao', 'endereco__linha1')
 
     def get_queryset(self):
         id = self.request.query_params.get('id', None)
@@ -51,7 +54,7 @@ class PontoTuristicoViewSet(ModelViewSet):
     def teste(self, request):
         pass
 class PontoTuristicoViewSetBd2(ModelViewSet):
-    queryset = PontoTuristico.objects.using('banco2').all()
+    queryset = PontoTuristico.objects.all()
     serializer_class = PontoTuristicoSerializer
 
 # class HapvidaQueryViewSet(ModelViewSet):
